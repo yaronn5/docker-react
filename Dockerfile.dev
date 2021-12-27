@@ -4,18 +4,10 @@ WORKDIR '/app'
 
 
 #COPY package.json .
-COPY --chown=node:node package.json .
+COPY package.json .
 
 RUN npm install
 
-RUN mkdir 'node_modules/.cache'
-RUN chown -R node:node node_modules
-
-#COPY . .
-COPY --chown=node:node . .
-
-RUN npm install -g npm@8.3.0
-
-USER node
+COPY . .
 
 CMD ["npm", "run", "start"]
